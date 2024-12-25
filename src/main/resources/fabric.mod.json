@@ -3,7 +3,7 @@
 	"id": "takeme",
 	"version": "${version}",
 	"name": "TakeMe",
-	"description": "Add the ability to carry players or be carried.",
+	"description": "Lightweight player riding mod for server side.",
 	"authors": [
 		{
 			"name": "CharcoalWhite",
