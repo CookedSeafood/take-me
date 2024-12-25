@@ -3,7 +3,7 @@
 	"id": "takeme",
 	"version": "${version}",
 	"name": "TakeMe",
-	"description": "Lightweight player riding mod for server side.",
+	"description": "Lightweight player riding mod runs on server-side.",
 	"authors": [
 		{
 			"name": "CharcoalWhite",
