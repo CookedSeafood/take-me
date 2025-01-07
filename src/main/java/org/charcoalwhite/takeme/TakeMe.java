@@ -24,7 +24,7 @@ public class TakeMe implements ModInitializer {
 		LOGGER.info("[TakeMe] *HeavyHeavyHeavy-*");
 
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-			if (entity.isPlayer()) {
+			if (entity.isPlayer() && !player.isUsingItem()) {
 				PlayerEntity player2 = (PlayerEntity) entity;
 				if (player.hasPassengers()) {
 					if (player.hasPassenger(player2)) {
