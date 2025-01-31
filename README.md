@@ -1,6 +1,6 @@
 # TakeMe
 
-TakeMe is a lightweight player riding mod runs on server-side. It is quite technically vanilla and it achives its main function by:
+TakeMe is a lightweight player riding mod runs server-side. It is quite technically vanilla and it achives its main function by:
 
 1. Use force riding. (This normally unforced)
 2. Send vihicle event network packets to the ridden player when start and stop riding. (This normally would only be sent to passengers)
