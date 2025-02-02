@@ -62,8 +62,8 @@ public class TakeMe implements ModInitializer {
 			}
 
 			PlayerEntity passengerPlayer = (PlayerEntity) passengerEntity;
-			passengerPlayer.startRiding(usedPlayer, true);
 			if (!usedPlayer.hasPassengers()) {
+				passengerPlayer.startRiding(usedPlayer, true);
 				return ActionResult.PASS;
 			}
 
@@ -73,6 +73,7 @@ public class TakeMe implements ModInitializer {
 			}
 
 			PlayerEntity passengerPlayer2 = (PlayerEntity) passengerEntity2;
+			passengerPlayer.startRiding(usedPlayer, true);
 			passengerPlayer2.startRiding(player, true);
 			return ActionResult.PASS;
 		});
