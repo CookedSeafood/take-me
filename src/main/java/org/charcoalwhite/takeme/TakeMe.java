@@ -27,35 +27,53 @@ public class TakeMe implements ModInitializer {
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			if (!entity.isPlayer()) {
 				return ActionResult.PASS;
-			} else
+			}
+
 			if (!(player.getMainHandStack().isEmpty() && player.getOffHandStack().isEmpty())) {
 				return ActionResult.PASS;
 			}
 
-			PlayerEntity player2 = (PlayerEntity) entity;
-			if (player.isSneaking()) {
-				if (!player.hasPassengers()) {
-					player2.startRiding(player, true);
-				} else
-				if (player.hasPassenger(player2)) {
-					if (player.getPitch() == -90.0) {
-						player2.stopRiding();
-					}
-				} else {
-					Entity entity2 = player.getFirstPassenger();
-					if (!entity2.isPlayer()) {
-						return ActionResult.PASS;
-					}
-
-					PlayerEntity player3 = (PlayerEntity) entity2;
-					if (!player2.hasPassengers()) {
-						player3.startRiding(player2, true);
-					}
+			PlayerEntity usedPlayer = (PlayerEntity) entity;
+			if (!player.isSneaking()) {
+				if (!usedPlayer.hasPassengers()) {
+					player.startRiding(usedPlayer, true);
 				}
-			} else
-			if (!player2.hasPassengers()) {
-				player.startRiding(player2, true);
+				return ActionResult.PASS;
 			}
+
+			int pitch = (int) player.getPitch();
+			if (!player.hasPassengers()) {
+				if (!(pitch == -90) && !usedPlayer.hasPassengers()) {
+					usedPlayer.startRiding(player, true);
+				}
+				return ActionResult.PASS;
+			}
+
+			if (player.hasPassenger(usedPlayer)) {
+				if (pitch == -90) {
+					usedPlayer.stopRiding();
+				}
+				return ActionResult.PASS;
+			}
+
+			Entity passengerEntity = player.getFirstPassenger();
+			if (!passengerEntity.isPlayer()) {
+				return ActionResult.PASS;
+			}
+
+			PlayerEntity passengerPlayer = (PlayerEntity) passengerEntity;
+			passengerPlayer.startRiding(usedPlayer, true);
+			if (!usedPlayer.hasPassengers()) {
+				return ActionResult.PASS;
+			}
+
+			Entity passengerEntity2 = usedPlayer.getFirstPassenger();
+			if (!passengerEntity2.isPlayer()) {
+				return ActionResult.PASS;
+			}
+
+			PlayerEntity passengerPlayer2 = (PlayerEntity) passengerEntity2;
+			passengerPlayer2.startRiding(player, true);
 			return ActionResult.PASS;
 		});
 	}
