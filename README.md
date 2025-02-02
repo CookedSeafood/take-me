@@ -59,6 +59,6 @@ Right click on the player who you would like to exchange with. If:
 
 ## FAQ
 
-### I can't click on any player except the one on my head / I can't transfer players
+### I can't click on any player except the one on my head
 
 Use client-side mods (eg. [Shoulder Surfing Reloaded](https://modrinth.com/mod/shoulder-surfing-reloaded)) to workaround this.
