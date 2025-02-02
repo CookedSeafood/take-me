@@ -2,7 +2,7 @@ package org.charcoalwhite.takeme;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ActionResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,34 +24,25 @@ public class TakeMe implements ModInitializer {
 		LOGGER.info("[TakeMe] *HeavyHeavyHeavy-*");
 
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-			if (entity.isPlayer() && player.getMainHandStack().isEmpty() && player.getOffHandStack().isEmpty()) {
-				PlayerEntity player2 = (PlayerEntity) entity;
-				if (player.hasPassengers()) {
-					if (player.hasPassenger(player2)) {
-						if (player.isSneaking() && player.getPitch() < 0) {
-							player2.stopRiding();
-						}
-					} else {
-						PlayerEntity player3 = (PlayerEntity) player.getFirstPassenger();
-						if (player3.squaredDistanceTo(player2.getEyePos()) < 1) {
-							if (!player2.hasPassengers()) {
-								player3.startRiding(player2, true);
-							}
-						}
-					}
-				} else {
-					if (player2.squaredDistanceTo(player) < 1) {
-						// Player2 is rider, do not care whether player2 has passenger.
-						player2.startRiding(player, true);
-					}
-				}
+			if (!entity.isPlayer()) {
+				return ActionResult.PASS;
+			}
 
-				// Player is rider, do not care whether player has passenger.
-				if (player.squaredDistanceTo(player2.getEyePos()) < 1) {
-					if (!player2.hasPassengers()) {
-						player.startRiding(player2, true);
+			if (player.isSneaking()) {
+				if (!player.hasPassengers()) {
+					entity.startRiding(player, true);
+				} else
+				if (player.hasPassenger(entity) && (int) player.getPitch() == 90) {
+					entity.stopRiding();
+				} else {
+					Entity entity2 = player.getFirstPassenger();
+					if (!entity.hasPassengers()) {
+						entity2.startRiding(entity, true);
 					}
 				}
+			} else
+			if (!entity.hasPassengers()) {
+				player.startRiding(entity, true);
 			}
 			return ActionResult.PASS;
 		});
