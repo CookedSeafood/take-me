@@ -25,7 +25,10 @@ public class TakeMe implements ModInitializer {
 		LOGGER.info("[TakeMe] *HeavyHeavyHeavy-*");
 
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
-			if (!(entity.isPlayer() && player.getMainHandStack().isEmpty() && player.getOffHandStack().isEmpty())) {
+			if (!entity.isPlayer()) {
+				return ActionResult.PASS;
+			} else
+			if (!(player.getMainHandStack().isEmpty() && player.getOffHandStack().isEmpty())) {
 				return ActionResult.PASS;
 			}
 
@@ -34,8 +37,10 @@ public class TakeMe implements ModInitializer {
 				if (!player.hasPassengers()) {
 					player2.startRiding(player, true);
 				} else
-				if (player.hasPassenger(player2) && (int) player.getPitch() == 90) {
-					player2.stopRiding();
+				if (player.hasPassenger(player2)) {
+					if (player.getPitch() == -90.0) {
+						player2.stopRiding();
+					}
 				} else {
 					Entity entity2 = player.getFirstPassenger();
 					if (!entity2.isPlayer()) {
