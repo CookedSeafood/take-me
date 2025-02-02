@@ -6,9 +6,9 @@ TakeMe is a no-compromises lightweight player riding mod runs server-side.
 
 Takeme does **not** move the riding position for player vehicles. For the following reasons:
 
-1. Aesthetic and physical looking
-2. Less ceilling hight requirement when indoors
-3. Align to vanilla
+1. Aesthetic and physical looking.
+2. Less ceilling hight requirement when indoors.
+3. Align to vanilla.
 
 Takeme is quite technically vanilla and it achives its main function by:
 
