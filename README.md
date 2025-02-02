@@ -13,38 +13,49 @@ Takeme does **not** move the riding position for player vehicles. For the follow
 Takeme is quite technically vanilla and it achives its main function by:
 
 1. Use force riding. (This normally unforced)
-2. Send vihicle event network packets to the ridden player when start and stop riding. (This normally would only be sent to passengers)
+2. Send vihicle event network packets to the vehicle player when mounting or dismounting. (This normally would only be sent to passengers)
 
 ## Usage
 
 Its functions can only be triggered with both hands empty.
 
-### Ride Player
-
-Right click on the player who you would like to ride. If:
-
-1. The player has no passenger.
-
 ### Mount Player
 
 Right click on the player who you would like to mount. If:
 
+1. The player has no passenger.
+
+### Carry Player
+
+Right click on the player who you would like to carry. If:
+
 1. You are sneaking.
 2. You have no passenger.
+3. Your pitch != -90.
 
-### Dismount Mounted Player
+### Dismount Passenger Player
 
-Right click on your mounted player who you would like to dismount. If:
+Right click on your passenger player who you would like to dismount. If:
 
 1. You are sneaking.
-2. Your pitch == 90.
+2. You have one or more passengers.
+3. Your pitch == -90.
 
-### Transfer the First Mounted Player
+### Transfer the First Passenger Player
 
 Right click on the player who you would like to transfer to. If:
 
 1. You are sneaking.
-2. The player has no passenger.
+2. You have one or more passengers.
+3. The player has no passenger.
+
+### Exchange the First Passenger Player
+
+Right click on the player who you would like to exchange with. If:
+
+1. You are sneaking.
+2. You have one or more passengers.
+3. The player has one or more passengers.
 
 ## FAQ
 
