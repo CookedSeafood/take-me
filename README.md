@@ -50,14 +50,6 @@ Right click on the player who you would like to transfer to. If:
 2. You have one or more passengers.
 3. The player has no passenger.
 
-### Exchange the First Passenger Player
-
-Right click on the player who you would like to exchange with. If:
-
-1. You are sneaking.
-2. You have one or more passengers.
-3. The player has one or more passengers.
-
 ## FAQ
 
 ### I can't click on any player except the one on my head
