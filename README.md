@@ -12,9 +12,9 @@ Takeme does **not** move the riding position for player vehicles. For the follow
 
 Takeme is quite technically vanilla and it achives its main function by:
 
-1. Use force riding. (This normally unforced)
-2. Redirect isSaveable() in addPassenger() to a custom mothod which returns isPlayer() if not saveable. (Player is not a saveable entity)
-3. Send EntityPassengersSetS2CPacket to the vehicle player when mounting or dismounting. (This normally would only be sent to passengers)
+1. Use force riding.
+2. Redirect isSaveable() in addPassenger() to a custom mothod which returns isPlayer() if not saveable.
+3. Send EntityPassengersSetS2CPacket to the vehicle player when mounting or dismounting.
 
 ## Usage
 
@@ -24,7 +24,8 @@ Its functions can only be triggered with both hands empty.
 
 Right click on the player who you would like to mount. If:
 
-1. The player has no passenger.
+1. You are not sneaking.
+2. The player has no passenger.
 
 ### Carry Player
 
