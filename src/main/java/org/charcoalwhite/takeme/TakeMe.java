@@ -64,17 +64,7 @@ public class TakeMe implements ModInitializer {
 			PlayerEntity passengerPlayer = (PlayerEntity) passengerEntity;
 			if (!usedPlayer.hasPassengers()) {
 				passengerPlayer.startRiding(usedPlayer, true);
-				return ActionResult.PASS;
 			}
-
-			Entity passengerEntity2 = usedPlayer.getFirstPassenger();
-			if (!passengerEntity2.isPlayer()) {
-				return ActionResult.PASS;
-			}
-
-			PlayerEntity passengerPlayer2 = (PlayerEntity) passengerEntity2;
-			passengerPlayer.startRiding(usedPlayer, true);
-			passengerPlayer2.startRiding(player, true);
 			return ActionResult.PASS;
 		});
 	}
