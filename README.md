@@ -2,7 +2,7 @@
 
 TakeMe is a no-compromises lightweight player riding mod runs server-side.
 
-## Why Another Player Riding Mod
+## Why Another Player Riding Mod?
 
 Takeme does **not** move the riding position for player vehicles. For the following reasons:
 
