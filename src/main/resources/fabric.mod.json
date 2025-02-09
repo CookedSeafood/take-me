@@ -6,22 +6,22 @@
 	"description": "Lightweight player riding mod runs on server-side.",
 	"authors": [
 		{
-			"name": "CharcoalWhite",
+			"name": "CookedSeafood",
 			"contact": {
-				"homepage": "https://github.com/CharcoalWhite"
+				"homepage": "https://github.com/CookedSeafood"
 			}
 		}
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/TakeMe",
-		"sources": "https://github.com/CharcoalWhite/TakeMe"
+		"sources": "https://github.com/CookedSeafood/TakeMe"
 	},
 	"license": "GNU-GPL-3.0",
 	"icon": "assets/takeme/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"org.charcoalwhite.takeme.TakeMe"
+			"net.cookedseafood.takeme.TakeMe"
 		]
 	},
 	"mixins": [

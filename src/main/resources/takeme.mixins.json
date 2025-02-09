@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "org.charcoalwhite.takeme.mixin",
+	"package": "net.cookedseafood.takeme.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		

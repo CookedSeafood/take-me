@@ -1,6 +1,8 @@
-package org.charcoalwhite.takeme;
+package net.cookedseafood.takeme;
 
+import net.cookedseafood.takeme.command.TakeMeCommand;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,6 +18,10 @@ public class TakeMe implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+	public static final byte versionMajor = 1;
+	public static final byte versionMinor = 0;
+	public static final byte versionPatch = 13;
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -23,6 +29,8 @@ public class TakeMe implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("[TakeMe] *HeavyHeavyHeavy-*");
+
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> TakeMeCommand.register(dispatcher, registryAccess));
 
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			if (!entity.isPlayer()) {
