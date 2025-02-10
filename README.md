@@ -13,12 +13,12 @@ Takeme does **not** move the riding position for player vehicles. For the follow
 Takeme is quite technically vanilla and it achives its main function by:
 
 1. Use force riding.
-2. Redirect isSaveable() in addPassenger() to a custom mothod which returns isPlayer() if not saveable.
-3. Send EntityPassengersSetS2CPacket to the vehicle player when mounting or dismounting.
+2. Redirect `isSaveable()` in `addPassenger()` to a custom method which returns `isPlayer()` if not saveable.
+3. Send `EntityPassengersSetS2CPacket` to the vehicle player when mounting or dismounting.
 
 ## Usage
 
-Its functions can only be triggered with both hands empty.
+Its functions can only be triggered with both hands empty by default.
 
 ### Mount Player
 
@@ -50,6 +50,23 @@ Right click on the player who you would like to transfer to. If:
 1. You are sneaking.
 2. You have one or more passengers.
 3. The player has no passenger.
+
+## Configuration
+
+The config file is not shipped along with the mod. Below is a template config file `config/takeme.json` filled with default values. You may only need to write the lines you would like to modify. (and braces)
+
+```json
+{
+  // False if whitelist mode, otherwise blacklist mode.
+  "mainHandFilterMode": false
+  // False if whitelist mode, otherwise blacklist mode.
+  "offHandFilterMode": false
+  // Air for empty hand.
+  "mainHandFilterItems": ["minecraft:air"]
+  // Air for empty hand.
+  "offHandFilterItems": ["minecraft:air"]
+}
+```
 
 ## FAQ
 
