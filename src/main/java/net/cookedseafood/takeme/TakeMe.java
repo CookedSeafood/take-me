@@ -8,12 +8,20 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 public class TakeMe implements ModInitializer {
 	public static final String MOD_ID = "takeme";
@@ -23,13 +31,19 @@ public class TakeMe implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+	public static final byte VERSION_MAJOR = 1;
+	public static final byte VERSION_MINOR = 1;
+	public static final byte VERSION_PATCH = 1;
+
+	public static final boolean MAIN_HAND_FILTER_MODE = false;
+	public static final boolean OFF_HAND_FILTER_MODE = false;
+	public static final Set<String> MAIN_HAND_FILTER_ITEMS = Stream.of("minecraft:air").collect(Collectors.toUnmodifiableSet());
+	public static final Set<String> OFF_HAND_FILTER_ITEMS = MAIN_HAND_FILTER_ITEMS;
+
 	public static boolean mainHandFilterMode = false;
 	public static boolean offHandFilterMode = false;
 	public static Set<String> mainHandFilterItems = Stream.of("minecraft:air").collect(Collectors.toUnmodifiableSet());
 	public static Set<String> offHandFilterItems = mainHandFilterItems;
-	public static final byte VERSION_MAJOR = 1;
-	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 0;
 
 	@Override
 	public void onInitialize() {
@@ -90,5 +104,42 @@ public class TakeMe implements ModInitializer {
 			}
 			return ActionResult.PASS;
 		});
+	}
+
+	public static int reload() {
+		String configString;
+		try {
+			configString = FileUtils.readFileToString(new File("./config/takeme.json"), StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			reset();
+			return 1;
+		}
+
+		JsonObject configObject = new Gson().fromJson(configString, JsonObject.class);
+
+        mainHandFilterMode =
+            configObject.has("mainHandFilterMode") ?
+            configObject.get("mainHandFilterMode").getAsBoolean() :
+            MAIN_HAND_FILTER_MODE;
+        offHandFilterMode =
+            configObject.has("offHandFilterMode") ?
+            configObject.get("offHandFilterMode").getAsBoolean() :
+            OFF_HAND_FILTER_MODE;
+        mainHandFilterItems =
+            configObject.has("mainHandFilterItems") ?
+            configObject.get("mainHandFilterItems").getAsJsonArray().asList().stream().map(jsonElement -> jsonElement.getAsString()).collect(Collectors.toUnmodifiableSet()) :
+            MAIN_HAND_FILTER_ITEMS;
+        offHandFilterItems =
+            configObject.has("offHandFilterItems") ?
+            configObject.get("offHandFilterItems").getAsJsonArray().asList().stream().map(jsonElement -> jsonElement.getAsString()).collect(Collectors.toUnmodifiableSet()) :
+            OFF_HAND_FILTER_ITEMS;
+        return 2;
+	}
+
+	public static void reset() {
+		mainHandFilterMode = MAIN_HAND_FILTER_MODE;
+        offHandFilterMode = OFF_HAND_FILTER_MODE;
+        mainHandFilterItems = MAIN_HAND_FILTER_ITEMS;
+        offHandFilterItems = OFF_HAND_FILTER_ITEMS;
 	}
 }
