@@ -3,10 +3,15 @@ package net.cookedseafood.takeme;
 import net.cookedseafood.takeme.command.TakeMeCommand;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +23,13 @@ public class TakeMe implements ModInitializer {
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final byte versionMajor = 1;
-	public static final byte versionMinor = 0;
-	public static final byte versionPatch = 13;
+	public static boolean mainHandFilterMode = false;
+	public static boolean offHandFilterMode = false;
+	public static Set<String> mainHandFilterItems = Stream.of("minecraft:air").collect(Collectors.toUnmodifiableSet());
+	public static Set<String> offHandFilterItems = mainHandFilterItems;
+	public static final byte VERSION_MAJOR = 1;
+	public static final byte VERSION_MINOR = 1;
+	public static final byte VERSION_PATCH = 0;
 
 	@Override
 	public void onInitialize() {
@@ -32,12 +41,18 @@ public class TakeMe implements ModInitializer {
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> TakeMeCommand.register(dispatcher, registryAccess));
 
+		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
+			TakeMeCommand.executeReload(server.getCommandSource());
+		});
+
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			if (!entity.isPlayer()) {
 				return ActionResult.PASS;
 			}
 
-			if (!(player.getMainHandStack().isEmpty() && player.getOffHandStack().isEmpty())) {
+			if (mainHandFilterMode == mainHandFilterItems.contains(player.getMainHandStack().getRegistryEntry().getIdAsString())
+				|| offHandFilterMode == offHandFilterItems.contains(player.getOffHandStack().getRegistryEntry().getIdAsString())
+			) {
 				return ActionResult.PASS;
 			}
 
