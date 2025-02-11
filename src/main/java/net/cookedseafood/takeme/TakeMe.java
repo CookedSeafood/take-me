@@ -1,5 +1,7 @@
 package net.cookedseafood.takeme;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import net.cookedseafood.takeme.command.TakeMeCommand;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -8,20 +10,15 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 public class TakeMe implements ModInitializer {
 	public static final String MOD_ID = "takeme";
@@ -33,7 +30,7 @@ public class TakeMe implements ModInitializer {
 
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 1;
+	public static final byte VERSION_PATCH = 2;
 
 	public static final boolean MAIN_HAND_FILTER_MODE = false;
 	public static final boolean OFF_HAND_FILTER_MODE = false;

@@ -17,6 +17,7 @@ public class TakeMeCommand {
             )
             .then(
                 CommandManager.literal("reload")
+                .requires(source -> source.hasPermissionLevel(2))
                 .executes(context -> executeReload((ServerCommandSource)context.getSource()))
             )
         );
