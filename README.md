@@ -51,6 +51,10 @@ Right click on the player who you would like to transfer to. If:
 2. You have one or more passengers.
 3. The player has no passenger.
 
+## Commands
+
+`/takeme reload` Reload config file. (Require premission level 2)
+
 ## Configuration
 
 The config file is not shipped along with the mod. Below is a template config file `config/takeme.json` filled with default values. You may only need to write the lines you would like to modify. (and braces)
