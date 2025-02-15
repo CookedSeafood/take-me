@@ -57,20 +57,21 @@ Right click on the player who you would like to transfer to. If:
 
 ## Configuration
 
-The config file is not shipped along with the mod. Below is a template config file `config/takeme.json` filled with default values. You may only need to write the lines you would like to modify. (and braces)
+Below is a template config file `config/takeme.json` filled with default values. You may only need to write the lines you would like to modify.
 
 ```json
 {
-  // False if whitelist mode, otherwise blacklist mode.
   "mainHandFilterMode": false
-  // False if whitelist mode, otherwise blacklist mode.
   "offHandFilterMode": false
-  // Air for empty hand.
   "mainHandFilterItems": ["minecraft:air"]
-  // Air for empty hand.
   "offHandFilterItems": ["minecraft:air"]
 }
 ```
+
+- `mainHandFilterMode`: False if whitelist mode, otherwise blacklist mode.
+- `offHandFilterMode`: False if whitelist mode, otherwise blacklist mode.
+- `mainHandFilterItems`: Air for empty hand.
+- `offHandFilterItems`: Air for empty hand.
 
 ## FAQ
 
