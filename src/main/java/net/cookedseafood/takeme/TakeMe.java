@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TakeMe implements ModInitializer {
-	public static final String MOD_ID = "takeme";
+	public static final String MOD_ID = "take-me";
 
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
@@ -30,17 +30,17 @@ public class TakeMe implements ModInitializer {
 
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 2;
+	public static final byte VERSION_PATCH = 3;
 
 	public static final boolean MAIN_HAND_FILTER_MODE = false;
 	public static final boolean OFF_HAND_FILTER_MODE = false;
 	public static final Set<String> MAIN_HAND_FILTER_ITEMS = Stream.of("minecraft:air").collect(Collectors.toUnmodifiableSet());
 	public static final Set<String> OFF_HAND_FILTER_ITEMS = MAIN_HAND_FILTER_ITEMS;
 
-	public static boolean mainHandFilterMode = false;
-	public static boolean offHandFilterMode = false;
-	public static Set<String> mainHandFilterItems = Stream.of("minecraft:air").collect(Collectors.toUnmodifiableSet());
-	public static Set<String> offHandFilterItems = mainHandFilterItems;
+	public static boolean mainHandFilterMode;
+	public static boolean offHandFilterMode;
+	public static Set<String> mainHandFilterItems;
+	public static Set<String> offHandFilterItems;
 
 	@Override
 	public void onInitialize() {
@@ -48,7 +48,7 @@ public class TakeMe implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("[TakeMe] *HeavyHeavyHeavy-*");
+		LOGGER.info("[Take-Me] *HeavyHeavyHeavy-*");
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> TakeMeCommand.register(dispatcher, registryAccess));
 
@@ -106,7 +106,7 @@ public class TakeMe implements ModInitializer {
 	public static int reload() {
 		String configString;
 		try {
-			configString = FileUtils.readFileToString(new File("./config/takeme.json"), StandardCharsets.UTF_8);
+			configString = FileUtils.readFileToString(new File("./config/take-me.json"), StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			reset();
 			return 1;

@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "takeme",
+	"id": "take-me",
 	"version": "${version}",
-	"name": "TakeMe",
+	"name": "Take Me",
 	"description": "Lightweight player riding mod runs on server-side.",
 	"authors": [
 		{
@@ -13,11 +13,11 @@
 		}
 	],
 	"contact": {
-		"homepage": "https://modrinth.com/mod/TakeMe",
-		"sources": "https://github.com/CookedSeafood/TakeMe"
+		"homepage": "https://modrinth.com/mod/take-me",
+		"sources": "https://github.com/CookedSeafood/take-me"
 	},
 	"license": "GNU-GPL-3.0",
-	"icon": "assets/takeme/icon.png",
+	"icon": "assets/take-me/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
@@ -25,14 +25,14 @@
 		]
 	},
 	"mixins": [
-		"takeme.mixins.json"
+		"take-me.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.10",
 		"minecraft": "1.21.4",
 		"java": ">=21",
 		"fabric-api": "*",
-		"candywrapper": ">=0.4.1"
+		"candy-wrapper": ">=0.5.0"
 	},
 	"suggests": {
 		"another-mod": "*"

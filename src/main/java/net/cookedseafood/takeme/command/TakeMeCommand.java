@@ -24,12 +24,12 @@ public class TakeMeCommand {
     }
 
     public static int executeVersion(ServerCommandSource source) {
-        source.sendFeedback(() -> Text.literal("TakeMe " + TakeMe.VERSION_MAJOR + "." + TakeMe.VERSION_MINOR + "." + TakeMe.VERSION_PATCH), false);
+        source.sendFeedback(() -> Text.literal("Take Me " + TakeMe.VERSION_MAJOR + "." + TakeMe.VERSION_MINOR + "." + TakeMe.VERSION_PATCH), false);
         return 0;
     }
 
     public static int executeReload(ServerCommandSource source) {
-        source.sendFeedback(() -> Text.literal("Reloading TakeMe!"), true);
+        source.sendFeedback(() -> Text.literal("Reloading Take Me!"), true);
         return TakeMe.reload();
     }
 }
