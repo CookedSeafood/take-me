@@ -1,6 +1,7 @@
 package net.cookedseafood.takeme;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.cookedseafood.takeme.command.TakeMeCommand;
 import net.fabricmc.api.ModInitializer;
@@ -9,6 +10,7 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ActionResult;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +19,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.mutable.MutableInt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +33,7 @@ public class TakeMe implements ModInitializer {
 
 	public static final byte VERSION_MAJOR = 1;
 	public static final byte VERSION_MINOR = 1;
-	public static final byte VERSION_PATCH = 3;
+	public static final byte VERSION_PATCH = 4;
 
 	public static final boolean MAIN_HAND_FILTER_MODE = false;
 	public static final boolean OFF_HAND_FILTER_MODE = false;
@@ -53,7 +56,7 @@ public class TakeMe implements ModInitializer {
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> TakeMeCommand.register(dispatcher, registryAccess));
 
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-			TakeMeCommand.executeReload(server.getCommandSource());
+			TakeMe.reload(server);
 		});
 
 		UseEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
@@ -103,34 +106,51 @@ public class TakeMe implements ModInitializer {
 		});
 	}
 
-	public static int reload() {
+	public static int reload(MinecraftServer server) {
 		String configString;
 		try {
 			configString = FileUtils.readFileToString(new File("./config/take-me.json"), StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			reset();
-			return 1;
+			return -1;
 		}
 
-		JsonObject configObject = new Gson().fromJson(configString, JsonObject.class);
+		JsonObject config = new Gson().fromJson(configString, JsonObject.class);
+		MutableInt counter = new MutableInt(0);
 
-        mainHandFilterMode =
-            configObject.has("mainHandFilterMode") ?
-            configObject.get("mainHandFilterMode").getAsBoolean() :
-            MAIN_HAND_FILTER_MODE;
-        offHandFilterMode =
-            configObject.has("offHandFilterMode") ?
-            configObject.get("offHandFilterMode").getAsBoolean() :
-            OFF_HAND_FILTER_MODE;
-        mainHandFilterItems =
-            configObject.has("mainHandFilterItems") ?
-            configObject.get("mainHandFilterItems").getAsJsonArray().asList().stream().map(jsonElement -> jsonElement.getAsString()).collect(Collectors.toUnmodifiableSet()) :
-            MAIN_HAND_FILTER_ITEMS;
-        offHandFilterItems =
-            configObject.has("offHandFilterItems") ?
-            configObject.get("offHandFilterItems").getAsJsonArray().asList().stream().map(jsonElement -> jsonElement.getAsString()).collect(Collectors.toUnmodifiableSet()) :
-            OFF_HAND_FILTER_ITEMS;
-        return 2;
+		if (config.has("mainHandFilterMode")) {
+			mainHandFilterMode = config.get("mainHandFilterMode").getAsBoolean();
+			counter.increment();
+		} else {
+			mainHandFilterMode = MAIN_HAND_FILTER_MODE;
+		}
+
+		if (config.has("offHandFilterMode")) {
+			offHandFilterMode = config.get("offHandFilterMode").getAsBoolean();
+			counter.increment();
+		} else {
+			offHandFilterMode = OFF_HAND_FILTER_MODE;
+		}
+
+		if (config.has("mainHandFilterItems")) {
+			mainHandFilterItems = config.get("mainHandFilterItems").getAsJsonArray().asList().stream()
+				.map(JsonElement::getAsString)
+				.collect(Collectors.toUnmodifiableSet());
+			counter.increment();
+		} else {
+			mainHandFilterItems = MAIN_HAND_FILTER_ITEMS;
+		}
+
+		if (config.has("offHandFilterItems")) {
+			offHandFilterItems = config.get("offHandFilterItems").getAsJsonArray().asList().stream()
+				.map(JsonElement::getAsString)
+				.collect(Collectors.toUnmodifiableSet());
+			counter.increment();
+		} else {
+			offHandFilterItems = OFF_HAND_FILTER_ITEMS;
+		}
+
+        return counter.intValue();
 	}
 
 	public static void reset() {

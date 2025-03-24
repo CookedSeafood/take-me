@@ -30,6 +30,6 @@ public class TakeMeCommand {
 
     public static int executeReload(ServerCommandSource source) {
         source.sendFeedback(() -> Text.literal("Reloading Take Me!"), true);
-        return TakeMe.reload();
+        return Math.abs(TakeMe.reload(source.getServer()));
     }
 }
