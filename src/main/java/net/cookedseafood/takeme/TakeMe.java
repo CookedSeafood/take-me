@@ -33,7 +33,7 @@ public class TakeMe implements ModInitializer {
 
     public static final byte VERSION_MAJOR = 1;
     public static final byte VERSION_MINOR = 2;
-    public static final byte VERSION_PATCH = 0;
+    public static final byte VERSION_PATCH = 1;
 
     public static final boolean MAIN_HAND_FILTER_MODE = false;
     public static final boolean OFF_HAND_FILTER_MODE = false;
