@@ -2,6 +2,7 @@ package net.cookedseafood.takeme.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.cookedseafood.takeme.TakeMe;
+import net.cookedseafood.takeme.data.TakeMeConfig;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
@@ -30,6 +31,6 @@ public class TakeMeCommand {
 
     public static int executeReload(ServerCommandSource source) {
         source.sendFeedback(() -> Text.literal("Reloading Take Me!"), true);
-        return Math.abs(TakeMe.reload(source.getServer()));
+        return Math.abs(TakeMeConfig.reload(source.getServer()));
     }
 }
