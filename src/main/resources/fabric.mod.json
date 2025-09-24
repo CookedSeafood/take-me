@@ -32,7 +32,7 @@
         "minecraft": "~1.21.5",
         "java": ">=21",
         "fabric-api": "*",
-        "candy-wrapper": ">=0.7.5"
+        "candy-wrapper": ">=0.8.0"
     },
     "suggests": {
         "another-mod": "*"
