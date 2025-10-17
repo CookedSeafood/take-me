@@ -53,7 +53,7 @@ Right click on the player who you would like to transfer to. If:
 
 ## Commands
 
-`/takeme reload` Reload config file. (Require premission level 2)
+- `/takeme reload` Reload config file. (Require premission level 2)
 
 ## Configuration
 
