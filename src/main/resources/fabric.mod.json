@@ -3,7 +3,7 @@
     "id": "take-me",
     "version": "${version}",
     "name": "Take Me",
-    "description": "Lightweight player riding mod runs on server-side.",
+    "description": "Lightweight player riding mod.",
     "authors": [
         {
             "name": "CookedSeafood",
@@ -14,27 +14,26 @@
     ],
     "contact": {
         "homepage": "https://modrinth.com/mod/take-me",
-        "sources": "https://github.com/CookedSeafood/take-me"
+        "sources": "https://github.com/CookedSeafood/take-me",
+        "issues": "https://github.com/CookedSeafood/take-me/issues"
     },
     "license": "GNU-GPL-3.0",
     "icon": "assets/take-me/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "net.cookedseafood.takeme.TakeMe"
+            "net.hederamc.takeme.TakeMe"
         ]
     },
     "mixins": [
         "take-me.mixins.json"
     ],
     "depends": {
-        "fabricloader": ">=0.17.2",
-        "minecraft": "~1.21.5",
-        "java": ">=21",
+        "fabricloader": ">=0.18.4",
+        "minecraft": "~26.1-",
+        "java": ">=25",
         "fabric-api": "*",
-        "candy-wrapper": ">=0.8.0"
+        "fishbone-trehalose": "~4.0.0-"
     },
-    "suggests": {
-        "another-mod": "*"
-    }
+    "accessWidener": "take-me.classtweaker"
 }

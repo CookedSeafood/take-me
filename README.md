@@ -1,77 +1,16 @@
 # TakeMe
 
-TakeMe is a no-compromises lightweight player riding mod runs server-side.
+TakeMe is a no-compromises lightweight player riding mod.
 
-## Why Another Player Riding Mod?
+## Feature
 
-Takeme does **not** move the riding position for player vehicles. For the following reasons:
+With empty hands:
 
-1. Aesthetic and physical looking.
-2. Less ceilling hight requirement when indoors.
-3. Align to vanilla.
-
-Takeme is quite technically vanilla and it achives its main function by:
-
-1. Use force riding.
-2. Redirect `isSaveable()` in `addPassenger()` to a custom method which returns `isPlayer()` if not saveable.
-3. Send `EntityPassengersSetS2CPacket` to the vehicle player when mounting or dismounting.
-
-## Usage
-
-Its functions can only be triggered with both hands empty by default.
-
-### Mount Player
-
-Right click on the player who you would like to mount. If:
-
-1. You are not sneaking.
-2. The player has no passenger.
-
-### Carry Player
-
-Right click on the player who you would like to carry. If:
-
-1. You are sneaking.
-2. You have no passenger.
-3. Your pitch != -90.
-
-### Dismount Passenger Player
-
-Right click on your passenger player who you would like to dismount. If:
-
-1. You are sneaking.
-2. You have one or more passengers.
-3. Your pitch == -90.
-
-### Transfer the First Passenger Player
-
-Right click on the player who you would like to transfer to. If:
-
-1. You are sneaking.
-2. You have one or more passengers.
-3. The player has no passenger.
-
-## Commands
-
-- `/takeme reload` Reload config file. (Require premission level 2)
-
-## Configuration
-
-Below is a template config file `config/takeme.json` filled with default values. You may only need to write the lines you would like to modify.
-
-```json
-{
-  "mainHandFilterMode": false
-  "offHandFilterMode": false
-  "mainHandFilterItems": ["minecraft:air"]
-  "offHandFilterItems": ["minecraft:air"]
-}
-```
-
-- `mainHandFilterMode`: False if whitelist mode, otherwise blacklist mode.
-- `offHandFilterMode`: False if whitelist mode, otherwise blacklist mode.
-- `mainHandFilterItems`: Air for empty hand.
-- `offHandFilterItems`: Air for empty hand.
+- `Use` the *target* to **mount them** if the *target* has no passenger.
+- `Croach` + `Use` the *target* to **carry them** if you have no passenger.
+- `Croach` + `Use` the *passenger* to **dismount them**.
+- `Croach` + `Use` the *target* to **transfer your passengers to target** if you have passengers but the *target* don't.
+- `Croach` + `Use` the *target* to **exchange your passengers for target's** if both you and the *target* has passengers.
 
 ## FAQ
 
